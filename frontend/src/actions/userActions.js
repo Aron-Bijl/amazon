@@ -16,6 +16,9 @@ import {
     USER_SIGNIN_REQUEST, 
     USER_SIGNIN_SUCCESS, 
     USER_SIGNOUT, 
+    USER_TOPSELLERS_FAIL, 
+    USER_TOPSELLERS_REQUEST, 
+    USER_TOPSELLERS_SUCCESS, 
     USER_UPDATE_FAIL, 
     USER_UPDATE_PROFILE_FAIL, 
     USER_UPDATE_PROFILE_REQUEST, 
@@ -64,8 +67,8 @@ export const detailsUser = (userId) => async (dispatch, getState) => {
     const  {userSignin: {userInfo}} = getState();
     try {
         const { data } = await axios.get(`/api/users/${userId}`, {
-            headers: { Authorization: `Bearer ${userInfo.token}` },
-        })
+            headers: { Authorization: `Bearer ${userInfo?.token}` },
+        });
         dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
     } catch (error) {
         const message = error.response && error.response.data.message 
@@ -145,4 +148,16 @@ export const deleteUser = (userId) => async (dispatch, getState) => {
     }
 }
 
+export const listTopSellers = () => async (dispatch) => {
+    dispatch({type: USER_TOPSELLERS_REQUEST});
+    try {
+        const { data } = await axios.get('/api/users/top-sellers');
+        dispatch({type: USER_TOPSELLERS_SUCCESS, payload: data});
+    } catch (error) {
+        const message = error.response && error.response.data.message 
+        ? error.response.data.message
+        : error.message;
+        dispatch({type: USER_TOPSELLERS_FAIL, payload: message});
+    }
+}
 

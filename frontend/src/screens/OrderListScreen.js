@@ -22,24 +22,20 @@ export default function OrderListScreen(props) {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch({ type: ORDER_DELETE_RESET });
     dispatch(listOrders({ seller: sellerMode ? userInfo._id : '' }));
   }, [dispatch, sellerMode, successDelete, userInfo._id]);
-
   const deleteHandler = (order) => {
     if (window.confirm('Are you sure to delete?')) {
       dispatch(deleteOrder(order._id));
     }
   };
-  
   return (
     <div>
       <h1>Orders</h1>
       {loadingDelete && <LoadingBox></LoadingBox>}
       {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
-
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
@@ -61,7 +57,7 @@ export default function OrderListScreen(props) {
             {orders.map((order) => (
               <tr key={order._id}>
                 <td>{order._id}</td>
-                <td>{order.user.name}</td>
+                <td>{order.user ? order.user.name : 'Deleted User'}</td>
                 <td>{order.createdAt.substring(0, 10)}</td>
                 <td>{order.totalPrice.toFixed(2)}</td>
                 <td>{order.isPaid ? order.paidAt.substring(0, 10) : 'No'}</td>
