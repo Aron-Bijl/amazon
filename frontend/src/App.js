@@ -28,6 +28,10 @@ import SearchScreen from './screens/SearchScreen';
 import { listProductsCategories } from './actions/productActions';
 import LoadingBox from './components/LoadingBox';
 import MessageBox from './components/MessageBox';
+import MapScreen from './screens/MapScreen';
+import DashboardScreen from './screens/DashboardScreen';
+import SupportScreen from './screens/SupportScreen';
+import ChatBox from './components/ChatBox';
 
 function App() {
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
@@ -174,10 +178,14 @@ function App() {
                   <Route path="/order/:id"   element={ <OrderScreen /> }/>
                   <Route path="/orderhistory"   element={ <OrderHistoryScreen /> }/>
                   <Route path="/profile"    element={<PrivateRoute> <ProfileScreen /></PrivateRoute>}/>
+                  <Route path="/map"        element={<PrivateRoute> <MapScreen /></PrivateRoute>} />
                   <Route path="/productlist" element={ <AdminRoute> <ProductListScreen /> </AdminRoute>} exact/>
-                  <Route path="/orderlist" element={ <AdminRoute> <OrderListScreen /> </AdminRoute> } exact/>
-                  <Route path="/userlist" element={ <AdminRoute> <UserListScreen /> </AdminRoute> }/>
+    
+                  <Route path="/orderlist"  element={ <AdminRoute> <OrderListScreen /> </AdminRoute> } exact/>
+                  <Route path="/userlist"   element={ <AdminRoute> <UserListScreen /> </AdminRoute> }/>
                   <Route path="/user/:id/edit" element={ <AdminRoute> <UserEditScreen /> </AdminRoute> } />
+                  <Route path="/dashboard" element={ <AdminRoute> <DashboardScreen /> </AdminRoute> } />
+                  <Route path="/support" element={ <AdminRoute> <SupportScreen /> </AdminRoute> } />
                   <Route path="/productlist/seller" element={<SellerRoute><ProductListScreen/></SellerRoute>}/>
                   <Route path="/orderlist/seller" element={<SellerRoute><OrderListScreen/></SellerRoute>}/>
                   <Route path="/search/name" element={<SearchScreen />} exact></Route>
@@ -197,7 +205,7 @@ function App() {
                     exact
                   ></Route>
                   <Route
-                    path="/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order"
+                    path="/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order/"
                     element={<SearchScreen />}
                     exact
                   ></Route>
@@ -205,9 +213,10 @@ function App() {
                 </Routes>
               </main>
             
-            <footer className="row center">
-                All right reserved 
-            </footer>
+          <footer className="row center">
+            {userInfo && !userInfo.isAdmin && <ChatBox userInfo={userInfo} />}
+          <div>All right reserved</div>{' '}
+        </footer>
       </div>
       </Router>
   );
