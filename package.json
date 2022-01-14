@@ -17,7 +17,7 @@
   "bugs": {
     "url": "https://github.com/basir/amazona/issues"
   },
-  "homepage": "https://github.com/basir/amazona#readme",
+  "homepage": "https://ecommerce-app-aronbijl.herokuapp.com/",
   "devDependencies": {
     "eslint": "^7.9.0",
     "eslint-plugin-react": "^7.21.2",
