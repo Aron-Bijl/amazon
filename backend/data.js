@@ -15,13 +15,7 @@ const data = {
               rating: 4.5,
               numReviews: 120,
           },
-        },
-        {
-          name: 'John',
-          email: 'user@example.com',
-          password: bcrypt.hashSync('1234', 8),
-          isAdmin: false,
-        },
+        }
     ],
     products:[
         {
