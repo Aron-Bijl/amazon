@@ -36,7 +36,13 @@ productRouter.get(
         : order === 'toprated'
         ? { rating: -1 }
         : { _id: -1 };
-
+    const count = await Product.count({
+      ...sellerFilter,
+      ...nameFilter,
+      ...categoryFilter,
+      ...priceFilter,
+      ...ratingFilter,
+    });
     const products = await Product.find({
       ...sellerFilter,
       ...nameFilter,
