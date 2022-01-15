@@ -18,7 +18,6 @@ productRouter.get(
       req.query.min && Number(req.query.min) !== 0 ? Number(req.query.min) : 0;
     const max =
       req.query.max && Number(req.query.max) !== 0 ? Number(req.query.max) : 0;
-      console.log(req.query);
     const rating =
       req.query.rating && Number(req.query.rating) !== 0
         ? Number(req.query.rating)
@@ -28,7 +27,6 @@ productRouter.get(
     const sellerFilter = seller ? { seller } : {};
     const categoryFilter = category ? { category } : {};
     const priceFilter = min && max ? { price: { $gte: min, $lte: max } } : {};
-    console.log(priceFilter);
     const ratingFilter = rating ? { rating: { $gte: rating } } : {};
     const sortOrder =
       order === 'lowest'
