@@ -10,12 +10,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/basir/amazona.git"
+    "url": ""
   },
-  "author": "",
+  "author": "Aron Bijl",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/basir/amazona/issues"
+    "url": "https://github.com/Aron-Bijl/amazon"
   },
   "homepage": ".",
   "devDependencies": {
